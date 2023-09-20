@@ -1,0 +1,6 @@
+<%= render 'devise/shared/links', locals = { devise_mapping: Devise.mappings[:user],
+                                             resource_name: Devise.mappings[:user].name,
+                                             resource_class: Devise.mappings[:user].to } \
+      if !user_signed_in? %>
+
+<%= button_to('Sign out', destroy_user_session_path, method: :delete) if user_signed_in? %>
