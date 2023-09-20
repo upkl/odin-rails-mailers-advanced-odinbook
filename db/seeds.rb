@@ -17,3 +17,9 @@ f_internet = Faker::Internet
               email: f_internet.email,
               password: f_internet.password)
 end
+
+(1..10).to_a.combination(2).to_a.sample(10).each do |s, r|
+  FriendRequest.create(sender: User.find(s),
+                       receiver: User.find(r),
+                       status: [0, 1, 2].sample)
+end
