@@ -11,6 +11,12 @@ require 'faker'
 
 f_name = Faker::Name
 f_internet = Faker::Internet
+f_lorem = Faker::Lorem
+f_quote = Faker::Quote
+
+Post.all.each { |p| p.delete }
+FriendRequest.all.each { |r| r.delete }
+User.all.filter { |u| u.id != 1 }.each { |u| u.delete }
 
 10.times do
   User.create(name: f_name.name,
@@ -23,4 +29,10 @@ end
   FriendRequest.create(sender: User.find(s),
                        receiver: User.find(r),
                        status: [0, 1, 2].sample)
+end
+
+30.times do
+  Post.create(user_id: (1..10).to_a.sample,
+              title: f_quote.yoda,
+              content: f_lorem.paragraphs.join("\n"))
 end

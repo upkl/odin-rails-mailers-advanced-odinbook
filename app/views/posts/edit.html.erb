@@ -1,0 +1,11 @@
+<h2>Edit Post</h2>
+
+<%= render partial: 'form', locals: {post: @post} %>
+
+<p><%= link_to "Show this post", @post %></p>
+
+<p><%= link_to "All Posts", Post %></p>
+
+<p><%= link_to "My Profile", current_user %></p>
+
+<%= render 'common/devise_links' %>

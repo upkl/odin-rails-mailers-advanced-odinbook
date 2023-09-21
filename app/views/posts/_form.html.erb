@@ -1,0 +1,25 @@
+<%= form_with model: post do |f| %>
+  <% if post.errors.any? %>
+    <div style="color: red">
+      <h3><%= pluralize(post.errors.count, "error") %> prohibited this post from being submitted:</h3>
+
+      <ul>
+        <% post.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+
+  <div>
+    <%= f.label :content %>
+    <%= f.text_area :content %>
+  </div>
+  
+  <%= f.submit %>
+<% end %>

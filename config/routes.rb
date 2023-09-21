@@ -6,5 +6,7 @@ Rails.application.routes.draw do
 
   resources :friend_requests, only: %i[create update destroy]
 
+  resources :posts
+
   root 'users#show'
 end
