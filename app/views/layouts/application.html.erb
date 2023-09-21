@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>OdinRailsMailersAdvancedOdinbook</title>
+    <title>Odinbook</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -13,6 +13,7 @@
   <body>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p> 
+    <%= render partial: 'users/navbar' if user_signed_in? %>
     <%= yield %>
   </body>
 </html>

@@ -2,15 +2,15 @@
 
 <% case @friendship %>
 <% when :friend %>
-  You are friends.
+  You are friends. <%= render partial: 'destroy_friendship_button', locals: {user: @user} %>
 <% when :acceptable %>
-  Accept friendship request?
+  <%= render partial: 'answer_friend_request_buttons', locals: {user: @user} %>
 <% when :pending %>
-  Your request is pending.
+  Your request is pending. <%= render partial: 'destroy_friend_request_button', locals: {user: @user} %>
 <% when :rejecting %>
   Your request has been rejected.
 <% when :invitable %>
-  Send a friendship request?
+  <%= render partial: 'create_friend_request_button', locals: {user: @user} %>
 <% end %>
 
 <p><%= link_to 'All Users', users_path %></p>

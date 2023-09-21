@@ -1,0 +1,2 @@
+<%= button_to "Accept friendship request", "#{friend_request_path(id: user.id)}", method: :patch, params: {status: :accepted} %>
+<%= button_to "Reject friendship request", "#{friend_request_path(id: user.id)}", method: :patch, params: {status: :rejected} %>

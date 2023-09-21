@@ -1,0 +1,12 @@
+<div>
+  <% unless current_user.friend_requests_received.pending.empty? %>
+    <p>You have pending friendship requests:</p>
+    <ul>
+      <% current_user.friend_requests_received.pending.includes(:sender).each do |request| %>
+        <li>
+          <%= link_to request.sender.name, request.sender %> <%= render partial: 'answer_friend_request_buttons', locals: {user: request.sender} %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>

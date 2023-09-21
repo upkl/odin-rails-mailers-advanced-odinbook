@@ -4,11 +4,11 @@
   <% @users.each do |user| %>
     <li>
       <%= link_to user.name, user %>
-      <% if @acceptable_users.include?(user) %>Accept friendship request?
-      <% elsif @friends.include?(user) %>You are friends.
-      <% elsif @pending_users.include?(user) %>Your request is pending.
+      <% if @acceptable_users.include?(user) %> <%= render partial: 'answer_friend_request_buttons', locals: {user: user} %>
+      <% elsif @friends.include?(user) %>You are friends.  <%= render partial: 'destroy_friendship_button', locals: {user: user} %>
+      <% elsif @pending_users.include?(user) %>Your request is pending. <%= render partial: 'destroy_friend_request_button', locals: {user: user} %>
       <% elsif @rejecting_users.include?(user) %>Your request has been rejected.
-      <% else %>Send a friendship request?
+      <% else %><%= render partial: 'create_friend_request_button', locals: {user: user} %>
       <% end %>
     </li>
   <% end %>
