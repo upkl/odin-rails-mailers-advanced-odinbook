@@ -12,6 +12,7 @@ require 'faker'
 USERS_COUNT = 10
 FRIEND_REQUESTS_COUNT = USERS_COUNT**2 / 5
 POSTS_COUNT = USERS_COUNT * 4
+COMMENTS_COUNT = POSTS_COUNT * 3
 
 f_name = Faker::Name
 f_internet = Faker::Internet
@@ -46,4 +47,10 @@ Post.all.each do |p|
   (1..USERS_COUNT).reject { |u| u == p.user_id }.sample(rand(USERS_COUNT)).each do |u|
     p.likes.create(user_id: u)
   end
+end
+
+COMMENTS_COUNT.times do
+  post = Post.all.sample
+  user = post.user.friends.sample
+  Comment.create(post:, user:, content: f_quote.matz)
 end

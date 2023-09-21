@@ -14,6 +14,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     redirect_to posts_url unless @post.user_id == current_user.id || current_user.friend_ids.include?(@post.user_id)
 
+    @comments = @post.comments.includes(:user).sort_by(&:created_at).reverse
     @likes = @post.likes
     @liked = @likes.find_by(user_id: current_user.id)
   end
@@ -54,6 +55,8 @@ class PostsController < ApplicationController
 
     redirect_to posts_url
   end
+
+  private
 
   def post_params
     params.require(:post).permit(:title, :content)

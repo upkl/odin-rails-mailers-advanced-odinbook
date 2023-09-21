@@ -1,0 +1,15 @@
+<h2><%= @post.title %></h2>
+
+<p>By <%= link_to @post.user.name, @post.user %></p>
+
+<p><%= @post.content %></p>
+
+<%= render partial: 'form', locals: {post: @post, comment: @comment} %>
+
+<p><%= link_to "Back to post", @post %></p>
+
+<p><%= link_to "All Posts", Post %></p>
+
+<p><%= link_to "My Profile", current_user %></p>
+
+<%= render 'common/devise_links' %>

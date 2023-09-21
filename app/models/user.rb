@@ -12,6 +12,7 @@ class User < ApplicationRecord
   has_many :friend_requests_received, foreign_key: 'receiver_id', class_name: 'FriendRequest'
   has_many :posts
   has_many :likes
+  has_many :comments
 
   def friends
     result = friend_requests_sent.accepted.map(&:receiver)
