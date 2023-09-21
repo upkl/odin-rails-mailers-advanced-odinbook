@@ -1,3 +1,18 @@
 <h2><%= @user.name %></h2>
 
+<% case @friendship %>
+<% when :friend %>
+  You are friends.
+<% when :acceptable %>
+  Accept friendship request?
+<% when :pending %>
+  Your request is pending.
+<% when :rejecting %>
+  Your request has been rejected.
+<% when :invitable %>
+  Send a friendship request?
+<% end %>
+
+<p><%= link_to 'All Users', users_path %></p>
+
 <%= render 'common/devise_links' %>
