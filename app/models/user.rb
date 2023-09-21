@@ -14,6 +14,9 @@ class User < ApplicationRecord
   has_many :likes
   has_many :comments
 
+  include Gravtastic
+  gravtastic secure: true
+
   def friends
     result = friend_requests_sent.accepted.map(&:receiver)
     result.union(friend_requests_received.accepted.map(&:sender))
