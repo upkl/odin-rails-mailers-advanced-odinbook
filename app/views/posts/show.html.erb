@@ -5,8 +5,19 @@
 <p><%= @post.content %></p>
 
 <% if @post.user == current_user %>
+  <%= "#{@likes.length} #{'user'.pluralize(@likes.length)} liked this post." unless @likes.empty? %>
   <p><%= link_to "Edit this post", edit_post_path %>
   <p><%= button_to "Delete this post", @post, method: :delete %>
+<% else %>
+  <% if @liked %>
+    You
+    <%= "and #{@likes.length - 1} #{'user'.pluralize(@likes.length - 1)}" if @likes.length > 1 %>
+    liked this post.
+    <%= button_to "Unlike", post_like_path(@post, @liked), method: :delete %>
+  <% else %>
+    <%= "#{@likes.length} #{'user'.pluralize(@likes.length)} liked this post." unless @likes.empty? %>
+    <%= button_to "Like", post_likes_path(@post) %>
+  <% end %>
 <% end %>
 
 <p><%= link_to "Write a new post", new_post_path %></p>

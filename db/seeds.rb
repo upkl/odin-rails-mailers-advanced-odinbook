@@ -9,30 +9,41 @@
 #   Character.create(name: "Luke", movie: movies.first)
 require 'faker'
 
+USERS_COUNT = 10
+FRIEND_REQUESTS_COUNT = USERS_COUNT**2 / 5
+POSTS_COUNT = USERS_COUNT * 4
+
 f_name = Faker::Name
 f_internet = Faker::Internet
 f_lorem = Faker::Lorem
 f_quote = Faker::Quote
 
-Post.all.each { |p| p.delete }
-FriendRequest.all.each { |r| r.delete }
-User.all.filter { |u| u.id != 1 }.each { |u| u.delete }
+Like.all.each(&:delete)
+Post.all.each(&:delete)
+FriendRequest.all.each(&:delete)
+User.all.filter { |u| u.id != 1 }.each(&:delete)
 
-10.times do
+USERS_COUNT.times do
   User.create(name: f_name.name,
               email: f_internet.email,
               password: f_internet.password)
 end
 
-(1..10).to_a.combination(2).to_a.sample(20).each do |u1, u2|
+(1..USERS_COUNT).to_a.combination(2).to_a.sample(FRIEND_REQUESTS_COUNT).each do |u1, u2|
   r, s = [u1, u2].sample(2)
   FriendRequest.create(sender: User.find(s),
                        receiver: User.find(r),
                        status: [0, 1, 2].sample)
 end
 
-30.times do
-  Post.create(user_id: (1..10).to_a.sample,
+POSTS_COUNT.times do
+  Post.create(user_id: rand(1..USERS_COUNT),
               title: f_quote.yoda,
               content: f_lorem.paragraphs.join("\n"))
+end
+
+Post.all.each do |p|
+  (1..USERS_COUNT).reject { |u| u == p.user_id }.sample(rand(USERS_COUNT)).each do |u|
+    p.likes.create(user_id: u)
+  end
 end

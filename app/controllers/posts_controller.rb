@@ -13,6 +13,9 @@ class PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     redirect_to posts_url unless @post.user_id == current_user.id || current_user.friend_ids.include?(@post.user_id)
+
+    @likes = @post.likes
+    @liked = @likes.find_by(user_id: current_user.id)
   end
 
   def new
