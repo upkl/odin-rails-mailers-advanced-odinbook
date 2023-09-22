@@ -1,3 +1,7 @@
+<% likes ||= post.likes %>
+<% liked ||= post.liked_by(current_user.id) %>
+<% comments ||= post.sorted_comments %>
+
 <p>By <%= link_to post.user.name, post.user %></p>
 
 <p><%= post.content %></p>

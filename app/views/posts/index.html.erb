@@ -2,10 +2,7 @@
 
 <% @posts.each do |post| %>
   <h3><%= post.title %></h3>
-  <%= render partial: 'post', locals: { post:,
-                                        likes: post.likes,
-                                        liked: post.liked_by(current_user.id),
-                                        comments: post.sorted_comments } %>
+  <%= render partial: 'post', locals: { post: } %>
 <% end %>
 
 <p><%= link_to "Write a new post", new_post_path %></p>
