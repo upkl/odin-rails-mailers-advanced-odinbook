@@ -1,4 +1,4 @@
-<h2><%= @user.name %></h2>
+<h1><%= @user.name %></h1>
 
 <%= image_tag @user.gravatar_url %>
 
@@ -26,6 +26,18 @@
   Your request has been rejected.
 <% when :invitable %>
   <%= render partial: 'create_friend_request_button', locals: {user: @user} %>
+<% end %>
+
+<% unless @user.posts.empty? %>
+  <h2>Posts</h2>
+  <% @user.posts.each do |post| %>
+    <h3><%= post.title %></h3>
+    <%= render partial: 'posts/post', locals: { post: } %>
+  <% end %>
+<% end %>
+
+<% unless @user == current_user %>
+  <p><%= link_to "My Profile", current_user %></p>
 <% end %>
 
 <p><%= link_to 'All Users', users_path %></p>
