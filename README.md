@@ -1,24 +1,15 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This project is a mini-facebook-clone, inspired by The Odin Project, https://www.theodinproject.com/lessons/ruby-on-rails-rails-final-project
 
-Things you may want to cover:
+Still to do:
 
-* Ruby version
+* Welcome mails
 
-* System dependencies
+* Page layout
 
-* Configuration
+* Navigation bar
 
-* Database creation
+* Edit comments in-place
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Buttons (friendship / likes) should work without re-displaying the whole page
