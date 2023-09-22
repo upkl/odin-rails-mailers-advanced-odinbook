@@ -15,6 +15,8 @@ POSTS_COUNT = USERS_COUNT * 4
 COMMENTS_COUNT = POSTS_COUNT * 3
 
 f_name = Faker::Name
+f_address = Faker::Address
+f_food = Faker::Food
 f_internet = Faker::Internet
 f_lorem = Faker::Lorem
 f_quote = Faker::Quote
@@ -28,6 +30,8 @@ User.create(name: 'upkl', email: 'upkl@upkl.example', password: 'odinpw')
 (USERS_COUNT - 1).times do
   User.create(name: f_name.name,
               email: f_internet.email,
+              city: f_address.city,
+              dish: f_food.dish,
               password: f_internet.password)
 end
 

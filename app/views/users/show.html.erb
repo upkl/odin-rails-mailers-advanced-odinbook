@@ -2,6 +2,19 @@
 
 <%= image_tag @user.gravatar_url %>
 
+<dl>
+  <% if @user.city && @user.city.length.positive? %>
+    <dt>City</dt>
+    <dd><%= @user.city %></dd>
+  <% end %>
+  <% if @user.dish && @user.dish.length.positive? %>
+    <dt>Favourite dish</dt>
+    <dd><%= @user.dish %></dd>
+  <% end %>
+</dl>
+
+<%= link_to 'Edit my profile', edit_user_path(@user) if @user == current_user %>
+
 <% case @friendship %>
 <% when :friend %>
   You are friends. <%= render partial: 'destroy_friendship_button', locals: {user: @user} %>

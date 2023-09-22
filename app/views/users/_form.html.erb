@@ -1,0 +1,29 @@
+<%= form_with model: user do |f| %>
+  <% if user.errors.any? %>
+    <div style="color: red">
+      <h3><%= pluralize(user.errors.count, "error") %> prohibited this profile information from being submitted:</h3>
+
+      <ul>
+        <% user.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+
+  <div>
+    <%= f.label :city %>
+    <%= f.text_field :city %>
+  </div>
+
+  <div>
+    <%= f.label :dish, 'Favourite dish' %>
+    <%= f.text_field :dish %>
+  </div>
+  
+  <%= f.submit %>
+<% end %>

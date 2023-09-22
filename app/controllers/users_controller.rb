@@ -27,11 +27,31 @@ class UsersController < ApplicationController
                   end
   end
 
+  def edit
+    @user = current_user
+  end
+
+  def update
+    @user = current_user
+
+    if @user.update(user_params)
+      redirect_to current_user
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
   def index
     @users = User.all.reject { |u| u == current_user } # .includes(:friend_requests_sent, :friend_requests_received)
     @acceptable_users = current_user.friend_requests_received.pending.map(&:sender)
     @rejecting_users = current_user.friend_requests_sent.rejected.map(&:receiver)
     @pending_users = current_user.friend_requests_sent.pending.map(&:receiver)
     @friends = current_user.friends
+  end
+
+  private
+
+  def user_params
+    params.require(:user).permit(:name, :city, :dish)
   end
 end
