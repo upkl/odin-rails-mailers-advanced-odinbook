@@ -19,12 +19,13 @@ f_internet = Faker::Internet
 f_lorem = Faker::Lorem
 f_quote = Faker::Quote
 
-Like.all.each(&:delete)
-Post.all.each(&:delete)
-FriendRequest.all.each(&:delete)
-User.all.filter { |u| u.id != 1 }.each(&:delete)
+[Comment, Like, Post, FriendRequest, User].each { |model| model.all.each(&:delete) }
 
-USERS_COUNT.times do
+ActiveRecord::Base.connection.reset_pk_sequence!('users')
+
+User.create(name: 'upkl', email: 'upkl@upkl.example', password: 'odinpw')
+
+(USERS_COUNT - 1).times do
   User.create(name: f_name.name,
               email: f_internet.email,
               password: f_internet.password)
