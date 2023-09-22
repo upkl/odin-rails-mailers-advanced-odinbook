@@ -1,38 +1,9 @@
 <h2><%= @post.title %></h2>
 
-<p>By <%= link_to @post.user.name, @post.user %></p>
-
-<p><%= @post.content %></p>
-
-<% if @post.user == current_user %>
-  <%= "#{@likes.length} #{'user'.pluralize(@likes.length)} liked this post." unless @likes.empty? %>
-  <p><%= link_to "Edit this post", edit_post_path %>
-  <p><%= button_to "Delete this post", @post, method: :delete %>
-<% else %>
-  <% if @liked %>
-    You
-    <%= "and #{@likes.length - 1} #{'user'.pluralize(@likes.length - 1)}" if @likes.length > 1 %>
-    liked this post.
-    <%= button_to "Unlike", post_like_path(@post, @liked), method: :delete %>
-  <% else %>
-    <%= "#{@likes.length} #{'user'.pluralize(@likes.length)} liked this post." unless @likes.empty? %>
-    <%= button_to "Like", post_likes_path(@post) %>
-  <% end %>
-<% end %>
-
-<% unless @comments.empty? %>
-  <h3>Comments</h3>
-  <dl>
-    <% @comments.each do |comment| %>
-      <dt>By <%= link_to comment.user.name, comment.user %>, <%= time_ago_in_words(comment.created_at) %> ago</dt>
-      <dd><%= comment.content %></dd>
-      <dd><%= link_to "Edit this comment", edit_post_comment_path(@post, comment) if comment.user == current_user %></dd>
-      <dd><%= button_to "Delete this comment", post_comment_path(@post, comment), method: :delete if comment.user == current_user || @post.user == current_user %>
-    <% end %>
-  </dl>
-<% end %>
-
-<p><%= link_to "Comment on this post", new_post_comment_path(@post) %>
+<%= render partial: 'post', locals: { post: @post,
+                                      likes: @post.likes,
+                                      liked: @post.liked_by(current_user.id),
+                                      comments: @post.sorted_comments } %>
 
 <p><%= link_to "Write a new post", new_post_path %></p>
 

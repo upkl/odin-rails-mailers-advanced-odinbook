@@ -5,6 +5,7 @@ class PostsController < ApplicationController
 
   def index
     friend_ids = current_user.friend_ids
+
     @posts = Post.all
                  .filter { |post| post.user_id == current_user.id || friend_ids.include?(post.user_id) }
                  .sort_by(&:updated_at).reverse
@@ -13,10 +14,6 @@ class PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     redirect_to posts_url unless @post.user_id == current_user.id || current_user.friend_ids.include?(@post.user_id)
-
-    @comments = @post.comments.includes(:user).sort_by(&:created_at).reverse
-    @likes = @post.likes
-    @liked = @likes.find_by(user_id: current_user.id)
   end
 
   def new
