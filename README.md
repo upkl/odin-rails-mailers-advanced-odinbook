@@ -4,8 +4,6 @@ This project is a mini-facebook-clone, inspired by The Odin Project, https://www
 
 Still to do:
 
-* Welcome mails
-
 * Page layout
 
 * Navigation bar
